@@ -1,0 +1,41 @@
+version: "3.8"
+
+name: distributed-rate-limiter
+
+services:
+    redis:
+        image: redis:8.0-rc1
+        ports:
+            - "6379:6379"
+        networks:
+            - appnet
+
+    mock-api-gateway:
+        build: ./gateways
+        depends_on:
+            - redis
+        deploy:
+            replicas: 3
+        environment:
+            - REDIS_URL=${REDIS_URL}
+            - USER_CAPACITY=${USER_CAPACITY}
+            - USER_REFILL_RATE=${USER_REFILL_RATE}
+            - IP_CAPACITY=${IP_CAPACITY}
+            - IP_REFILL_RATE=${IP_REFILL_RATE}
+        networks:
+            - appnet
+
+    nginx:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - mock-api-gateway
+        networks:
+            - appnet
+
+networks:
+    appnet:
+        driver: bridge
