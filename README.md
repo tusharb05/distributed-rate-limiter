@@ -23,7 +23,7 @@ It ensures fair request handling across multiple API gateways with **token bucke
 
 ## 📐 Architecture
 
-
+![Architecture](./assets/arch.png)
 
 ---
 
