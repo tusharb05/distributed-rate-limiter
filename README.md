@@ -14,7 +14,7 @@ It ensures fair request handling across multiple API gateways with **token bucke
 - **Two Types of Throttling**:
   - **IP-based throttling** for anonymous users.
   - **User-based throttling** for logged-in users.
-- **Per-Bucket Isolation**: Each user or IP gets its own independent token bucket. ✅ (This is the correct and scalable way to do it.)  
+- **Per-Bucket Isolation**: Each user or IP gets its own independent token bucket.  
 - **Atomic Operations with Lua Scripts**: Ensures race-free token checks and refills across multiple gateways.  
 - **Full Dockerization**: NGINX, Redis, and all API gateways run in containers.  
 - **Simple Setup**: `docker-compose` and `Makefile` included for quick startup.
@@ -23,7 +23,7 @@ It ensures fair request handling across multiple API gateways with **token bucke
 
 ## 📐 Architecture
 
-![Architecture](./assets/arch.png)
+![Architecture](./assets/arch2.png)
 
 ---
 
