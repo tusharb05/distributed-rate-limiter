@@ -1,4 +1,3 @@
-# hi
 # 🚦 Distributed Rate Limiter
 
 This project implements a **distributed rate limiting system** using **NGINX, Express, Redis, and Docker**.  
@@ -43,7 +42,7 @@ It ensures fair request handling across multiple API gateways with **token bucke
 ---
 
 ## 📂 Project Structure
-
+```
 ├── nginx/ # NGINX config for reverse proxy + load balancing
 ├── api-gateway/ # Express.js mock API gateway code (shared for all 3)
 │   ├── rateLimiter.js # Lua + Redis + Token Bucket implementation
@@ -51,7 +50,7 @@ It ensures fair request handling across multiple API gateways with **token bucke
 ├── docker-compose.yml # Container orchestration
 ├── Makefile # Simple container startup helpers
 └── README.md # Project documentation
-
+```
 
 
 ---
