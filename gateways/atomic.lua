@@ -22,22 +22,26 @@ else
     last_refill = now
 end
 
--- refill
+-- refill tokens
 local elapsed = (now - last_refill) / 1000.0
 tokens = math.min(capacity, tokens + (elapsed * refill_rate))
 
--- consume token if available
+-- consume token
 local allowed = 0
 if tokens >= 1 then
     tokens = tokens - 1
     allowed = 1
 end
 
--- save bucket back
+-- save bucket
 local new_bucket = cjson.encode({
     tokens = tokens,
     lastRefill = now
 })
 redis.call("JSON.SET", key, "$", new_bucket)
+
+-- bucket lifetime ~= 2x full refill time
+local ttl = math.ceil((capacity / refill_rate) * 2)
+redis.call("EXPIRE", key, ttl)
 
 return allowed
